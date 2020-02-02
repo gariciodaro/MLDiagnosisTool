@@ -10,7 +10,7 @@
 I developed a set of python scripts and classes that take as input 
 a Data Frame or a .csv and perform common machine learning techniques,
 both pre-processing and processing. After execution, you will get a new folder
-containing an HTML report plus all the required pickle files
+containing an HTML report( [see](http://garisplace.com/UniversalBank.html) here an example) plus all the required pickle files
 to deploy the best model over your data set. This should give you a guide
 of what path to follow on your search space of optimization.
 
