@@ -149,8 +149,12 @@ class DataStandardizer:
             df.drop(target_1,axis=1,inplace=True)
         original_cols=list(df.columns)
         df_hols=df.copy()
+        print(df_hols)
         # use imputer
-        df=self.replace_nan(df)
+        # Deactivated the imputer options
+        # better that data engineer decides on
+        # prepeossing what to do about missing.
+        #df=self.replace_nan(df)
         # get numerical data
         df=self.get_numerics_cols(df)
 

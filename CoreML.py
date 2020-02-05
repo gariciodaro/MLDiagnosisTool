@@ -205,7 +205,7 @@ def core_diagnosis(data_origin_string,
 
     #Pre process the dataset.
     df_1,df_cate,target_1=Ds.pipe_line_stand(df_1)
-    #print("categorical_columns",df_cate.columns)
+    print("categorical_columns",df_cate.columns)
     #print("null cols in df_1",DataStandardizer.get_null_coll(df_1))
     #print("null cols in df_cate",DataStandardizer.get_null_coll(df_cate))
 

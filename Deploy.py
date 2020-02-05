@@ -43,12 +43,16 @@ def deploy_helper(path):
         elif ("poly" in each_file_name_s) and ("obj.file" in each_file_name_s):
             poly_obj=OFH.load_object(path+"/"+each_file_name)
 
+        elif ("catencoders.file" in each_file_name_s):
+            encoders=OFH.load_object(path+"/"+each_file_name)
+
     predictor=Predictor(best_clf=best_clf,
                         min_max_scaler=min_max_scaler,
                         clustering_obj=clustering_obj,
                         best_features=best_features,
                         best_features_poly=best_features_poly,
-                        poly_obj=poly_obj)
+                        poly_obj=poly_obj,
+                        encoders=encoders)
     return predictor
 
 

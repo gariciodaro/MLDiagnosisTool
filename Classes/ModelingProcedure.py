@@ -85,15 +85,22 @@ class MachineLearning:
         if not df_cate.empty:
             categorical_not_found=False
             print("hot enconding categorical data")
+            encoder_objects_dict={}
             for each_col in list(df_cate.columns):
                 df_temp=df_cate[[each_col]]
                 if(i==0):
-                    df_encoded=DataStandardizer.get_encoded_single_df(df_temp)[0]
+                    enconding_holder=DataStandardizer.get_encoded_single_df(df_temp)
+                    df_encoded=enconding_holder[0]
+                    encoder_objects_dict[each_col]=enconding_holder[1]
                 else:
-                    temp=DataStandardizer.get_encoded_single_df(df_temp)[0]
+                    enconding_holder_2=DataStandardizer.get_encoded_single_df(df_temp)
+                    temp=enconding_holder_2[0]
+                    encoder_objects_dict[each_col]=enconding_holder_2[1]
                     print("temp",temp)
                     df_encoded=df_encoded.join(temp,lsuffix=str(i))
                 i=i+1
+             
+            self.encoder_objects_dict=encoder_objects_dict
             self.df_cate=df_encoded
         if categorical_not_found:
             print("Categorical data not detected.")
@@ -328,14 +335,14 @@ class MachineLearning:
                 #If value is int, then move 5 unist to the right
                 # and five unit to the left.
                 if isinstance(value, int):
-                    localized_parameters=[value+step for step in np.arange(-5,5,1)]
+                    localized_parameters=[value+step for step in np.arange(-10,10,1)]
                     if (k=="n_estimators"):
-                        localized_parameters=[value+step for step in np.arange(-20,20,4)]
+                        localized_parameters=[value+step for step in np.arange(-40,40,4)]
 
                 #If value is float, then test 7 envenltly spaces value between
                 # o and tree times value.
                 elif isinstance(value, float):
-                    localized_parameters=np.linspace(0.0, 3*value, num=12)
+                    localized_parameters=np.linspace(0.0, 6*value, num=17)
 
                 #Loop over localized_parameters
                 for each_localized_parameter in localized_parameters:
@@ -702,6 +709,11 @@ class MachineLearning:
         scaler,X = StaticML.min_max_df(X)
         print("saving scaler at", working_directory+name+"_scaler.file")
         OFH.save_object(working_directory+name+"_scaler.file",scaler)
+
+        if(len(self.df_cate)!=0):
+            print("saving Categorical encoders", working_directory+name+"_scaler.file")
+            OFH.save_object(working_directory+name+"_catencoders.file",self.encoder_objects_dict)
+            
 
         if clustering:
             clustering_obj,X=self.fit_clustering(X)

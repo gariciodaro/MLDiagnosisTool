@@ -27,7 +27,7 @@ class StaticDictML:
     
     def __init__(self):
         pass
-
+    """
     @staticmethod
     def get_dict_models():
         dict_models={"RF":RandomForestClassifier,
@@ -36,6 +36,13 @@ class StaticDictML:
                     "MLP":MLPClassifier,
                     "LDA":LinearDiscriminantAnalysis,
                     "QDA":QuadraticDiscriminantAnalysis,
+                    "KNN":KNeighborsClassifier
+                    }
+        return dict_models
+    """
+    def get_dict_models():
+        dict_models={
+                    "XGB":XGBClassifier,
                     "KNN":KNeighborsClassifier
                     }
         return dict_models

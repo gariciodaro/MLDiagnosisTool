@@ -12,19 +12,17 @@ on curret directory under the name
 import CoreML
 import pandas as pd
 
-
 # DO NOT FORGET THE FORWARD SLASH "/" ON name
 # name="/UniversalBank",
-df_1=pd.read_csv("./Datasets/UniversalBank.csv", delimiter=";",decimal=".")
-score_1=CoreML.core_diagnosis(data_origin=df_1,
-                  data_origin_string="object_dataframe",
-                  name="/UniversalBank",
+score_1=CoreML.core_diagnosis(data_origin="/home/gari/Desktop/folders/betting/data/curated_data_set_tournament.file",
+                  data_origin_string="pickle_df",
+                  name="/tennis",
                   string_metric="roc_auc_score",
                   number_of_clusters=40,
-                  hiper_tunning_iters=15,
+                  hiper_tunning_iters=30,
                   futher_op_boo=True,
                   balance_train=False,
                   clustering=True,
                   polynomial=True,
                   test_size=0.3)
-print("UniversalBank",score_1)
+print("tennis",score_1)

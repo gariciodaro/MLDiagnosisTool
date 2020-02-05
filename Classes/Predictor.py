@@ -23,7 +23,7 @@ class Predictor():
 
     def __init__(self,best_clf,min_max_scaler,
                 clustering_obj,best_features,
-                best_features_poly,poly_obj):
+                best_features_poly,poly_obj,encoders):
         """Use Pickle files from CoreML to deploy
         the classifier.
         Parameters:
@@ -51,6 +51,8 @@ class Predictor():
         if poly_obj is not None:
             self.poly_obj=poly_obj
             self.polynomial=True
+        if encoders is not None:
+            self.encoders=encoders
 
 
     def prepare_for_predict(self,X):
@@ -93,9 +95,11 @@ class Predictor():
             for each_col in list(df_cate.columns):
                 df_temp=df_cate[[each_col]]
                 if(i==0):
-                    df_encoded=Ds.get_encoded_single_df(df_temp)[0]
+                    df_encoded=Ds.transform_encoded_single_df(df_temp,
+                                                self.encoders.get(each_col))[0]
                 else:
-                    temp=Ds.get_encoded_single_df(df_temp)[0]
+                    temp=Ds.transform_encoded_single_df(df_temp,
+                                                self.encoders.get(each_col))[0]
                     df_encoded=df_encoded.join(temp,lsuffix=str(i))
                 i=i+1
             self.df_cate=df_encoded
