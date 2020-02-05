@@ -710,9 +710,13 @@ class MachineLearning:
         print("saving scaler at", working_directory+name+"_scaler.file")
         OFH.save_object(working_directory+name+"_scaler.file",scaler)
 
+        #fix bug on categorical data
         if(len(self.df_cate)!=0):
-            print("saving Categorical encoders", working_directory+name+"_scaler.file")
-            OFH.save_object(working_directory+name+"_catencoders.file",self.encoder_objects_dict)
+            print("saving Categorical encoders", 
+                    working_directory+name+"_scaler.file")
+            OFH.save_object(working_directory+
+                            name+"_catencoders.file",
+                            self.encoder_objects_dict)
             
 
         if clustering:

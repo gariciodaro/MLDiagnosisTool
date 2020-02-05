@@ -25,4 +25,4 @@ score_1=CoreML.core_diagnosis(data_origin="/home/gari/Desktop/folders/betting/da
                   clustering=True,
                   polynomial=True,
                   test_size=0.3)
-print("tennis",score_1)
+print("tennis",score_1) 

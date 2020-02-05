@@ -149,7 +149,7 @@ class DataStandardizer:
             df.drop(target_1,axis=1,inplace=True)
         original_cols=list(df.columns)
         df_hols=df.copy()
-        print(df_hols)
+        #print(df_hols)
         # use imputer
         # Deactivated the imputer options
         # better that data engineer decides on

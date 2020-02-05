@@ -29,6 +29,6 @@ data_t=pd.read_csv(path_csv, delimiter=";",decimal=".")
 y_real=data_t["Target"]
 data_t.drop("Target",axis=1,inplace=True)
 #Create DataFrame of predictions.
-predictions=predictor.make_predictions(data_t,False)
+predictions=predictor.make_predictions(data_t,False,)
 
 print(predictions)
