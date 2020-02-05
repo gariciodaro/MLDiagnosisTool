@@ -105,7 +105,7 @@ print(predictions)
 + The target variable must be the last column.
 + The software can only be used for binary classification.
 + It is able to handle categorical data. 
-+ It is able to handle missing values, on target removes the register, on numerical replace by the mean, on categorical also remove. 
++ It is able to handle missing values, on target removes the register, on numerical replace by the mean, on categorical also remove (This feature was deactivated, user must pass data set without missing data). 
 + If binary data is included in the features, they cannot be integers. For example, Gender cannot be 1 and 2, it must be “male” or “female”. This is due to the automatic detection of type data, in the case of Gender =1 or 2, the feature will be treated as numeric instead of categorical and won’t be hot encoded as intended.
 + The file 1_execute_example_dataset.py, contains the recommended parameters for core_diagnosis function. This configuration is balanced in terms of computational time and final score. Increasing the parameter hiper_tunning_iters is the most reliable way of increasing the score, but the computational time will also increase accordingly.
 + From my point of view, this software is a guiding tool rather than a final ruler. That is why I programmed it with so many parameters, and why the report is so important. For example, only a human can decide that in a giving situation, Quadratic Discriminant Analysis that scored 89% is a better option than Multi layer perceptron that score 95%, because the speed of prediction is QDA is much faster than MLP.
