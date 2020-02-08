@@ -106,6 +106,7 @@ class MachineLearning:
             print("Categorical data not detected.")
 
         self.improved_score_further_op=0
+        self.categorical_not_found=categorical_not_found
 
     def clusterting_metric(self,number_of_clusters=50):
         """Automatic execution of the elbow method"""
@@ -194,7 +195,7 @@ class MachineLearning:
             X_validation=X_validation[best_features_poly]
 
         #Join numerical data with hot encoded categorical data.
-        if(len(self.df_cate)!=0):
+        if not self.categorical_not_found:
             X_train=X_train.join(self.df_cate)
             X_validation=X_validation.join(self.df_cate)
 
@@ -531,7 +532,7 @@ class MachineLearning:
                                     k,v in best_model_config.items()})
         str_model_min_std=DA.key_with_minval({k:np.std(v[0]) for
                                     k,v in best_model_config.items()})
-        return str_model_best_score,str_model_min_std,clustering,polynomial
+        return str_model_best_score,str_model_min_std,clustering,polynomial,score_mean_dict
     
 
     def further_optimize_pipeline(self,cvb_best_score_tunning,
@@ -711,7 +712,7 @@ class MachineLearning:
         OFH.save_object(working_directory+name+"_scaler.file",scaler)
 
         #fix bug on categorical data
-        if(len(self.df_cate)!=0):
+        if not self.categorical_not_found:
             print("saving Categorical encoders", 
                     working_directory+name+"_scaler.file")
             OFH.save_object(working_directory+
@@ -741,7 +742,7 @@ class MachineLearning:
 
         #Merge with categorical features if
         # they exits
-        if(len(self.df_cate)!=0):
+        if not self.categorical_not_found:
             X=X.join(self.df_cate)
 
         if self.balance_train:

@@ -8,6 +8,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 #Machine learning metrics
 from sklearn.metrics import (roc_auc_score,
                              recall_score,
@@ -27,7 +28,7 @@ class StaticDictML:
     
     def __init__(self):
         pass
-    """
+    
     @staticmethod
     def get_dict_models():
         dict_models={"RF":RandomForestClassifier,
@@ -36,16 +37,18 @@ class StaticDictML:
                     "MLP":MLPClassifier,
                     "LDA":LinearDiscriminantAnalysis,
                     "QDA":QuadraticDiscriminantAnalysis,
-                    "KNN":KNeighborsClassifier
+                    "KNN":KNeighborsClassifier,
+                    "GNB":GaussianNB,
                     }
         return dict_models
     """
     def get_dict_models():
         dict_models={
-                    "XGB":XGBClassifier,
-                    "KNN":KNeighborsClassifier
+                    "LgR":LogisticRegression,
+                    "KNN":KNeighborsClassifier,
                     }
         return dict_models
+    """
 
     @staticmethod
     def get_dict_metrics():
@@ -146,4 +149,6 @@ class StaticDictML:
                                 0.03,0.2,0.5,0.4,0.7,
                                 0.015,0.026,0.344,0.04,
                                 0.00001,0.45,0.55]}
+        if(string_model=='GaussianNB'):
+            grid = {"var_smoothing":[1e-5,1e-6,1e-7,1e-8,1e-9,1e-10,1e-11,0.5e-9,0.7e-9]}
         return grid

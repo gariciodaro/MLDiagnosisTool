@@ -21,6 +21,7 @@ def deploy_helper(path):
     best_features_poly=None
     best_features=None
     poly_obj=None
+    encoders=None
 
     #Check and assign variables for class Predictor
     for each_file_name in file_names:

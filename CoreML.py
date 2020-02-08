@@ -202,10 +202,12 @@ def core_diagnosis(data_origin_string,
 
     #Instate DataStandardizer
     Ds=DataStandardizer()
+    print()
 
     #Pre process the dataset.
     df_1,df_cate,target_1=Ds.pipe_line_stand(df_1)
     print("categorical_columns",df_cate.columns)
+    print(df_1)
     #print("null cols in df_1",DataStandardizer.get_null_coll(df_1))
     #print("null cols in df_cate",DataStandardizer.get_null_coll(df_cate))
 
@@ -238,7 +240,8 @@ def core_diagnosis(data_origin_string,
     (str_model_best_score,
         str_model_min_std,
         clustering,
-        polynomial)=MP_1.configurations_and_plot(number_of_clusters,
+        polynomial,
+        score_mean_dict)=MP_1.configurations_and_plot(number_of_clusters,
                                                  clustering,
                                                  polynomial,
                                                  working_directory)
@@ -297,6 +300,7 @@ def core_diagnosis(data_origin_string,
             clustering=clustering,
             polynomial=polynomial,
             balance_train=balance_train,
+            score_mean_dict=score_mean_dict,
             selected_model=MP_1.string_model,
             super_parameters=MP_1.super_parameters,
             final_training_score=MP_1.final_training_score,
